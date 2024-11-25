@@ -1,7 +1,8 @@
+package Main;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import GameObject.GameObject;
+import Objekte.GameObject;
 
 public class Handler {
     public ArrayList<GameObject> object = new ArrayList<GameObject>();

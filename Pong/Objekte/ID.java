@@ -1,4 +1,4 @@
-package GameObject;
+package Objekte;
 
 public enum ID {
 

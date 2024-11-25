@@ -1,9 +1,10 @@
-package GameObject;
+package Objekte;
 
 import java.awt.Graphics;
 
 public abstract class GameObject {
 
+    
     protected float x, y, velX, velY;
     protected ID id;
 

@@ -1,15 +1,17 @@
+package Main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import GameObject.Ball;
-import GameObject.Gegner;
-import GameObject.ID;
-import GameObject.Player;
+import Eingaben.KeyHandler;
+import Objekte.Ball;
+import Objekte.Gegner;
+import Objekte.ID;
+import Objekte.Player;
 
-public class Game extends Canvas implements Runnable {
-
+public class Game extends Canvas implements Runnable {                                  // wird dadurch zur Komponente und lässt sich einem Frame zuordnen
+                                                                                        //Runnable enthält Methode public void run()
     //Variablen
     public static int breite = 800, hoehe = 600;
     private String title = "Pong Tutorial";
@@ -18,6 +20,7 @@ public class Game extends Canvas implements Runnable {
 
     // Instanzen
     private Handler handler;
+    private KeyHandler keyHandler;
 
     private static final long serialVersionUID = -4594745848274477315L;
 
@@ -30,8 +33,11 @@ public class Game extends Canvas implements Runnable {
 
     private void init() {
         handler = new Handler();
+        keyHandler = new KeyHandler();
 
-        handler.addObject(new Player(30,hoehe/2 - 65, ID.Player));
+        this.addKeyListener(keyHandler);
+
+        handler.addObject(new Player(30, hoehe/2 - 65, ID.Player, keyHandler));
 
         handler.addObject(new Gegner(breite - 50, (hoehe/2) - 65, ID.Gegner));
 
@@ -90,6 +96,7 @@ public class Game extends Canvas implements Runnable {
         bs.show();
         g.dispose();
     }
+    // Bewegung der Objekte
     private void tick() {
         handler.tick();
 

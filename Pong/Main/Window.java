@@ -1,3 +1,4 @@
+package Main;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -13,8 +14,7 @@ public class Window {
         frame.setTitle(titel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(game);
-
+        frame.add(game);                                                    //hinzufügen von allem was in Game ist (durch Canvas)
         frame.setVisible(true);
     }
 }
