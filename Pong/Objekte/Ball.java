@@ -36,8 +36,9 @@ public class Ball extends GameObject {
         if(y <= 0) {                                        // Abprallen am oberen Rand
             velY += 4;
         }
-
-    for(int i = 0; i < handler.object.size() ; i++) {        // Player Kollision mit dem Ball
+    
+        // Player Kollision mit dem Ball
+    for(int i = 0; i < handler.object.size() ; i++) {
         if(handler.object.get(i).getId() == ID.Player) {
             if(getBounds().intersects(handler.object.get(i).getBounds())) {
                 velX += 4;
@@ -45,6 +46,7 @@ public class Ball extends GameObject {
 
         }
     }
+    // Gegner Kollision mit dem Ball
     for(int i = 0; i < handler.object.size() ; i++) {
         if(handler.object.get(i).getId() == ID.Gegner) {
             if(getBounds().intersects(handler.object.get(i).getBounds())) {
@@ -52,7 +54,26 @@ public class Ball extends GameObject {
             }
         }
     }
+    
+
+    // Ball über linke Seite, Gegner erziehlt einen Punkt
+    if(x < 0) {
+        x = (Game.breite/2) - (30/2);
+
+        velX = 4;
+        Game.gegnerPoint++;
     }
+
+    // Ball über rechte Seite, Spieler erziehlt einen Punkt
+    if(x > Game.breite - 20) {
+        Game.playerPoint++;
+        x = (Game.breite/2) - (30/2);
+        velX = -4;
+    }
+
+    x += velX;
+    y += velY;
+}
 
     @Override
     public Rectangle getBounds() {
@@ -61,3 +82,4 @@ public class Ball extends GameObject {
     
 
 }
+

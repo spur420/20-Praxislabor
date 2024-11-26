@@ -1,6 +1,7 @@
 package Main;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -13,10 +14,12 @@ import Objekte.Player;
 public class Game extends Canvas implements Runnable {                                  // wird dadurch zur Komponente und lässt sich einem Frame zuordnen
                                                                                         //Runnable enthält Methode public void run()
     //Variablen
-    public static int breite = 800, hoehe = 600;
+    public static int breite =1000, hoehe = 700;
     private String title = "Pong Tutorial";
     private Thread thread;
     private boolean isRunning = false;
+    public static int playerPoint = 0;
+    public static int gegnerPoint = 0;
 
     // Instanzen
     private Handler handler;
@@ -39,7 +42,7 @@ public class Game extends Canvas implements Runnable {                          
 
         handler.addObject(new Player(30, hoehe/2 - 65, ID.Player, keyHandler));
 
-        handler.addObject(new Gegner(breite - 50, (hoehe/2) - 65, ID.Gegner));
+        handler.addObject(new Gegner(breite - 50, (hoehe/2) - 65, ID.Gegner, handler));
 
         handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball, handler));
 
@@ -90,6 +93,12 @@ public class Game extends Canvas implements Runnable {                          
             y += 40;
 
         }
+
+        // Punkte
+        g.setFont(new Font("Arial", Font.PLAIN, 90));
+        g.setColor(Color.WHITE);
+        g.drawString(String.valueOf(playerPoint), Game.breite / 4 - 30, 90);
+        g.drawString(String.valueOf(gegnerPoint), Game.breite - (Game.breite/4) - 30, 90);
 
         handler.render(g);
 
