@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable {                          
 
     // Instanzen
     private Handler handler;
-    private KeyHandler keyHandler;
+    private KeyHandler keyHandler;                                                      // Objekt keyHandler verweist auf die Klasse KeyHandler
 
     private static final long serialVersionUID = -4594745848274477315L;
 
@@ -31,17 +31,17 @@ public class Game extends Canvas implements Runnable {                          
         start();
     }
 
-    private void init() {
+    private void init() {                                                               // Initialisierung
         handler = new Handler();
         keyHandler = new KeyHandler();
 
-        this.addKeyListener(keyHandler);
+        this.addKeyListener(keyHandler);                                                // addKeyListener aus der Klasse Canvas
 
         handler.addObject(new Player(30, hoehe/2 - 65, ID.Player, keyHandler));
 
         handler.addObject(new Gegner(breite - 50, (hoehe/2) - 65, ID.Gegner));
 
-        handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball));
+        handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball, handler));
 
     }
     //Methoden

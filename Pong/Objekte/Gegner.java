@@ -2,6 +2,7 @@ package Objekte;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 
 
@@ -22,6 +23,11 @@ public class Gegner extends GameObject{
     @Override
     public void tick() {
         
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle((int)x,(int)y,15,130);
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Objekte.GameObject;
 
 public class Handler {
+    
     public ArrayList<GameObject> object = new ArrayList<GameObject>();
 
     public void addObject (GameObject object) {

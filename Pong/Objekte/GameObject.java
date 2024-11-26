@@ -1,6 +1,7 @@
 package Objekte;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public abstract class GameObject {
 
@@ -16,6 +17,7 @@ public abstract class GameObject {
 
     public abstract void render(Graphics g);
     public abstract void tick();
+    public abstract Rectangle getBounds();
 
     // Setter und Getter
     public float getX() {
