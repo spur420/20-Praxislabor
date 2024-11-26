@@ -5,16 +5,18 @@ import java.awt.Rectangle;
 
 public abstract class GameObject {
 
-    
-    protected float x, y, velX, velY;
-    protected ID id;
+    // Eigenschaften des Spielobjekts
+    protected float x, y, velX, velY;                   // Position des Spielobjekts (x,y) Geschwindigkeit in x- und y-Richtung
+    protected ID id;                                    // Typ des Objekts
 
+    // Konstruktor
     public GameObject(float x, float y, ID id) {
         setX(x);
         setY(y);
         setId(id);
     }
 
+    // Abstrakte Methoden die erbende Klassen implementieren
     public abstract void render(Graphics g);
     public abstract void tick();
     public abstract Rectangle getBounds();
