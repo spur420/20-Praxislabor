@@ -1,4 +1,4 @@
-package Eingaben;                           // definiert Paket zu dem diese Klasse gehört
+package src.Eingaben;                           // definiert Paket zu dem diese Klasse gehört
 import java.awt.event.KeyEvent;             // ermöglicht Zugriff auf Informationen über Tastendrücke
 import java.awt.event.KeyListener;          // implementierung des KeyListeners für Tastatureingaben
 

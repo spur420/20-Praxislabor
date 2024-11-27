@@ -1,15 +1,15 @@
-package Main;                           // Definiert das Paket, zu dem diese Klasse gehört
+package src.Main;                           // Definiert das Paket, zu dem diese Klasse gehört
 import java.awt.Canvas;                 // Importiert die Zeichenfläche Canvas
 import java.awt.Color;                  // Ermöglicht Verwendung von Farben
 import java.awt.Font;                   // Ermöglicht Nutzung von Schriftarten
 import java.awt.Graphics;               // Zum Zeichnen von 2D-Elementen
 import java.awt.image.BufferStrategy;   // Vermeidet Flackern
 
-import Eingaben.KeyHandler;             // Importieren der verschiedenen Klassen
-import Objekte.Ball;
-import Objekte.Gegner;
-import Objekte.ID;
-import Objekte.Player;
+import src.Eingaben.KeyHandler;             // Importieren der verschiedenen Klassen
+import src.Objekte.Ball;
+import src.Objekte.Gegner;
+import src.Objekte.ID;
+import src.Objekte.Player;
 
 public class Game extends Canvas implements Runnable {              // wird dadurch zur Komponente und lässt sich einem Frame zuordnen
                                                                     //Runnable enthält Methode public void run()
@@ -89,7 +89,7 @@ public class Game extends Canvas implements Runnable {              // wird dadu
         int y = 0;                                              // Y-Position für die Liniensegmente
         g.setColor(Color.WHITE);                                // setzt die Farbe auf weiß
         for (int i = 0; i < 19 ; i++ ) {                        // zeichnet 19 Segmente
-            g.fillRect(breite/2 - 13, y, 26, 26);               // jedes Segment ist ein kleines Rechteck
+            g.fillRect(breite/2 - 13, y, 4, 30);               // jedes Segment ist ein kleines Rechteck
             y += 40;                                            // Verschiebt Y-Position für das nächste Element
         }
 
@@ -139,9 +139,6 @@ public class Game extends Canvas implements Runnable {              // wird dadu
     stop();                 // stoppt das Spiel sobald isRunning false wird
     }
 
-    // main Methode
-    public static void main(String[] args) {
-        new Game();                                     // erstellt eine neue Instanz des Spiels und startet es
-    }
+    
 }
 

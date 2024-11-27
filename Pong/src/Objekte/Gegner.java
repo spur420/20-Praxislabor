@@ -1,11 +1,11 @@
-package Objekte;
+package src.Objekte;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import Main.Game;
-import Main.Handler;
+import src.Main.Game;
+import src.Main.Handler;
 
 
 

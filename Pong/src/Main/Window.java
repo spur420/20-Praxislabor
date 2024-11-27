@@ -1,4 +1,4 @@
-package Main;
+package src.Main;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 

@@ -1,4 +1,4 @@
-package Objekte;
+package src.Objekte;
 
 
 // Identifiziert die Spielobjekte

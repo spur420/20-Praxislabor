@@ -1,10 +1,10 @@
-package Objekte;
+package src.Objekte;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import Main.Handler;
+import src.Main.Handler;
 
-import Main.Game;
+import src.Main.Game;
 
 public class Ball extends GameObject {
 
@@ -21,7 +21,7 @@ public class Ball extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.WHITE);                                // Setzt die Farbe des Balls auf weiß
+        g.setColor(Color.BLUE);                                // Setzt die Farbe des Balls auf weiß
         g.fillOval((int)x, (int)y, 30, 30);                     // Zeichnet Ball als Kreis mit d=30px
     }
 

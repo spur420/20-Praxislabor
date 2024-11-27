@@ -1,11 +1,11 @@
-package Objekte;                                // Definiert das Paket, zu dem diese Klasse gehört
+package src.Objekte;                                // Definiert das Paket, zu dem diese Klasse gehört
 
 import java.awt.Color;                          // Ermöglicht Definition von Farben
 import java.awt.Graphics;                       // Bietet Methoden zum Zeichnen von 2D-Grafiken
 import java.awt.Rectangle;                      // Definiert Begrenzungsrechtecke
 
-import Eingaben.KeyHandler;
-import Main.Game;
+import src.Eingaben.KeyHandler;
+import src.Main.Game;
 
 public class Player extends GameObject {
 

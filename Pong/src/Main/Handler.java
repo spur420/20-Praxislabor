@@ -1,8 +1,8 @@
-package Main;
+package src.Main;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import Objekte.GameObject;
+import src.Objekte.GameObject;
 
 public class Handler {
     
