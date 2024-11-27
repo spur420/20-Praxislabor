@@ -1,4 +1,5 @@
 package src.Main;                           // Definiert das Paket, zu dem diese Klasse gehört
+
 import java.awt.Canvas;                 // Importiert die Zeichenfläche Canvas
 import java.awt.Color;                  // Ermöglicht Verwendung von Farben
 import java.awt.Font;                   // Ermöglicht Nutzung von Schriftarten
@@ -7,11 +8,11 @@ import java.awt.image.BufferStrategy;   // Vermeidet Flackern
 
 import src.Eingaben.KeyHandler;             // Importieren der verschiedenen Klassen
 import src.Objekte.Ball;
-import src.Objekte.Gegner;
+import src.Objekte.Player2;
 import src.Objekte.ID;
 import src.Objekte.Player;
 
-public class Game extends Canvas implements Runnable {              // wird dadurch zur Komponente und lässt sich einem Frame zuordnen
+public class Game2 extends Canvas implements Runnable {              // wird dadurch zur Komponente und lässt sich einem Frame zuordnen
                                                                     //Runnable enthält Methode public void run()
     //Variablen
     public static int breite =1000, hoehe = 700;    // statische Variable für Breite und Höhe
@@ -19,8 +20,9 @@ public class Game extends Canvas implements Runnable {              // wird dadu
     private Thread thread;                          // Damit mehrere Threads parallel laufen
     private boolean isRunning = false;              // Kontrolle ob das Spiel läuft
     public static int playerPoint = 0;              // Punktestand Spieler
-    public static int gegnerPoint = 0;              // Punktestand Gegner
+    public static int player2Point = 0;              // Punktestand Spieler 2
     public String name1;
+    public String name2;
 
     // Instanzen
     private Handler handler;                                               // Verwaltet Spielobjekte
@@ -29,7 +31,7 @@ public class Game extends Canvas implements Runnable {              // wird dadu
     private static final long serialVersionUID = -4594745848274477315L;     // Serialisierung von Objekten, nötig in Canvas
 
     // Konstruktor
-    public Game(String name1) {
+    public Game2(String name1, String name2) {
 
         init();                                                     // initialisiert die notwendigen Objekte
         Window window = new Window(breite, hoehe, title, this);     // Erstellt das Spielfenster
@@ -43,7 +45,7 @@ public class Game extends Canvas implements Runnable {              // wird dadu
         this.addKeyListener(keyHandler);        // fügt KeyHandler hinzu, um Tastatureingaben zu registrieren
 
         handler.addObject(new Player(30, hoehe/2 - 65, ID.Player, keyHandler));                 // Erstellt Spieler
-        handler.addObject(new Gegner(breite - 50, (hoehe/2) - 65, ID.Gegner, handler));           // Erstellt Gegner
+        handler.addObject(new Player2(breite - 50, (hoehe/2) - 65, ID.Player2, keyHandler));      // Erstellt Spieler 2
         handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball, handler));      // Erstellt Ball
 
     }
@@ -74,7 +76,6 @@ public class Game extends Canvas implements Runnable {              // wird dadu
     // Hintergrund und Grafik
     private void render() {                                     // holt aktuelle Buffer Strategie
         BufferStrategy bs = this.getBufferStrategy();
-
         if(bs == null) {                                        // erstellt wenn noch keine existiert
             this.createBufferStrategy(3);                       // erstellt Buffer-Strategie mit 3 Puffern
             return;                                             // verlässt die Methode
@@ -82,6 +83,7 @@ public class Game extends Canvas implements Runnable {              // wird dadu
 
         // Graphics um 2D Dinge darzustellen
         Graphics g = bs.getDrawGraphics();                      // holt das Grafikobjekt zum Zeichnen
+        
         g.setColor(Color.BLACK);                                // setzt Zeichenfarbe auf schwarz
         g.fillRect(0, 0, breite, hoehe);                        // füllt das Spielfenster mit schwarzem Rechteck
 
@@ -96,8 +98,8 @@ public class Game extends Canvas implements Runnable {              // wird dadu
         // Zeichnet die Punktestände
         g.setFont(new Font("Arial", Font.PLAIN, 90));                                           // Setzt Schriftfarbe und Größe
         g.setColor(Color.WHITE);                                                                // Setzt Farbe auf weiß
-        g.drawString(String.valueOf(playerPoint), Game.breite / 4 - 30, 90);                    // zeichnet Spielerpunkte
-        g.drawString(String.valueOf(gegnerPoint), Game.breite - (Game.breite/4) - 30, 90);      // zeichnet Gegnerpunkte
+        g.drawString(String.valueOf(playerPoint), Game2.breite / 4 - 30, 90);                    // zeichnet Spielerpunkte
+        g.drawString(String.valueOf(player2Point), Game2.breite - (Game2.breite/4) - 30, 90);      // zeichnet Spieler2-Punkte
 
         handler.render(g);          // Zeichnet alle Spielobjekte
         bs.show();                  // zeigt Pufferinhalt an

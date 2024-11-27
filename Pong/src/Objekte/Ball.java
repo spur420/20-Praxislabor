@@ -56,11 +56,18 @@ public class Ball extends GameObject {
                 velX -= 4;                                                      // Erhöht die Geschwindigkeit nach links (vom Gegner weg)
             }
         }
+
+        // Spieler 2 Kollision mit dem Ball
+        if(handler.object.get(i).getId() == ID.Player2) {
+            if(getBounds().intersects(handler.object.get(i).getBounds())) {
+                velX -=4;
+            }
+        }
     }
     
 
     // Punkt für den Gegner, Ball verlässt Spielfeld links
-    if(x < 0) {                                                 // Wenn Ball die linke Seite verlässt:
+    if(x <= 0) {                                                 // Wenn Ball die linke Seite verlässt:
         x = (Game.breite/2) - (30/2);                           // setzt den Ball zurück in die Mitte
         velX = 4;                                               // setzt Geschwindigkeit Richtung Gegner
         Game.gegnerPoint++;                                     // Erhöht Punktzahl des Gegners

@@ -6,7 +6,8 @@ public enum ID {
 
     Player(),
     Gegner(),
-    Ball()
+    Ball(),
+    Player2()
 
 
 }

@@ -3,6 +3,7 @@ package src.Main;
 import javax.swing.*; // Importiert Klassen für grafische Benutzeroberflächen (GUI) aus dem Swing-Paket.
 
 import src.Main.Game;
+import src.Main.Game2;
 
 import java.awt.*; // Importiert Klassen für grafische Komponenten und Layouts.
 import java.awt.event.ActionEvent; // Importiert Klassen für Ereignisbehandlung von Aktionen.
@@ -69,9 +70,15 @@ public class Fenster5 { // Definiert eine öffentliche Klasse namens Fenster5.
             @Override
             public void actionPerformed(ActionEvent e) { // Führt die Aktion aus, wenn der Button geklickt wird.
                 String modus = gegenPCButton.isSelected() ? "Computer" : "anderen Spieler"; // Überprüft den ausgewählten Spielmodus.
-                String name1 = spieler1Name.getText(); // Liest den Text aus dem Textfeld für Spieler 1.
-                String name2 = spieler2Name.isEnabled() ? spieler2Name.getText() : "Computer"; // Liest den Text für Spieler 2 oder setzt auf "Computer".
+                String name1 = spieler1Name.getText().trim(); // Liest den Text aus dem Textfeld für Spieler 1.
+                String name2 = spieler2Name.isEnabled() ? spieler2Name.getText().trim() : "Computer"; // Liest den Text für Spieler 2 oder setzt auf "Computer".
 
+                if (name1.isEmpty() || (gegenSpielerButton.isSelected() && name2.isEmpty())) {
+                    JOptionPane.showMessageDialog(frame, "Bitte beide Spielernamen eingeben!", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Start-Dialog
                 JOptionPane.showMessageDialog(frame, // Zeigt eine Dialogbox mit den eingegebenen Spielinformationen.
                         "Spielmodus: " + modus + "\n" +
                         "Spieler 1: " + name1 + "\n" +
@@ -80,7 +87,13 @@ public class Fenster5 { // Definiert eine öffentliche Klasse namens Fenster5.
                         JOptionPane.INFORMATION_MESSAGE);
 
                 // Hier kannst du die Logik hinzufügen, um das eigentliche Pong-Spiel zu starten.
-                new Game();
+                frame.dispose(); // Schließt das Startfenster
+
+                if (gegenPCButton.isSelected()) {
+                    new Game(name1);
+                } else {
+                    new Game2(name1, name2);
+                }
             }
         });
 
@@ -95,6 +108,7 @@ public class Fenster5 { // Definiert eine öffentliche Klasse namens Fenster5.
             public void focusGained(FocusEvent e) { // Reaktion, wenn das Textfeld den Fokus erhält.
                 if (textField.getText().equals(placeholder)) { // Überprüft, ob der aktuelle Text dem Platzhalter entspricht.
                     textField.setText(""); // Löscht den Text, wenn er dem Platzhalter entspricht.
+                    textField.setForeground(Color.BLACK);
                 }
             }
 
@@ -102,8 +116,10 @@ public class Fenster5 { // Definiert eine öffentliche Klasse namens Fenster5.
             public void focusLost(FocusEvent e) { // Reaktion, wenn das Textfeld den Fokus verliert.
                 if (textField.getText().isEmpty()) { // Überprüft, ob das Feld leer ist.
                     textField.setText(placeholder); // Setzt den Platzhalter zurück, wenn das Feld leer ist.
+                    textField.setForeground(Color.GRAY);
                 }
             }
         });
+        textField.setForeground(Color.GRAY);
     }
 }
