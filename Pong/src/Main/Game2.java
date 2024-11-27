@@ -32,7 +32,8 @@ public class Game2 extends Canvas implements Runnable {              // wird dad
 
     // Konstruktor
     public Game2(String name1, String name2) {
-
+        this.name1 = name1;
+        this.name2 = name2;
         init();                                                     // initialisiert die notwendigen Objekte
         Window window = new Window(breite, hoehe, title, this);     // Erstellt das Spielfenster
         start();                                                    // startet das Spiel
@@ -46,7 +47,7 @@ public class Game2 extends Canvas implements Runnable {              // wird dad
 
         handler.addObject(new Player(30, hoehe/2 - 65, ID.Player, keyHandler));                 // Erstellt Spieler
         handler.addObject(new Player2(breite - 50, (hoehe/2) - 65, ID.Player2, keyHandler));      // Erstellt Spieler 2
-        handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball, handler));      // Erstellt Ball
+        handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball, handler, this));      // Erstellt Ball
 
     }
 
@@ -96,10 +97,14 @@ public class Game2 extends Canvas implements Runnable {              // wird dad
         }
 
         // Zeichnet die Punktestände
-        g.setFont(new Font("Arial", Font.PLAIN, 90));                                           // Setzt Schriftfarbe und Größe
+        g.setFont(new Font("Roboto", Font.PLAIN, 50));                                           // Setzt Schriftfarbe und Größe
         g.setColor(Color.WHITE);                                                                // Setzt Farbe auf weiß
-        g.drawString(String.valueOf(playerPoint), Game2.breite / 4 - 30, 90);                    // zeichnet Spielerpunkte
-        g.drawString(String.valueOf(player2Point), Game2.breite - (Game2.breite/4) - 30, 90);      // zeichnet Spieler2-Punkte
+        g.drawString(String.valueOf(playerPoint), Game.breite / 2 - 90, 90);                    // zeichnet Spielerpunkte
+        g.drawString(String.valueOf(player2Point), Game.breite / 2 + 40, 90);                   // zeichnet Spieler2-Punkte        
+
+        // Zeichnet die Spielernamen
+        g.drawString(name1, Game.breite / 8, 90);
+        g.drawString(name2, Game.breite * 6 / 8, 90);
 
         handler.render(g);          // Zeichnet alle Spielobjekte
         bs.show();                  // zeigt Pufferinhalt an

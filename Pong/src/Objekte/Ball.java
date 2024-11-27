@@ -5,16 +5,28 @@ import java.awt.Rectangle;
 import src.Main.Handler;
 
 import src.Main.Game;
+import src.Main.Game2;
 
 public class Ball extends GameObject {
 
     private Handler handler;                            // Instanz - Referenz auf den Handler der alle Objekte verwaltet
+    private Game game;
+    private Game2 game2;
 
     // Konstruktor
-    public Ball(float x, float y, ID id, Handler handler) {
+    public Ball(float x, float y, ID id, Handler handler, Game game) {
         super(x, y, id);                                        // Ruft Konstruktor der Basisklasse GameObject auf
         this.handler = handler;                                 // Initialisiert den Handler
-
+        this.game = game;
+        this.game2 = null;
+        velX = -4;                              // Setzt Anfangsgeschwindigkeit des Balls in X-Richtung
+        velY = 4;                               // Setzt Anfangsgeschwindigkeit des Balls in Y-Richtung
+    }
+    public Ball(float x, float y, ID id, Handler handler, Game2 game2) {
+        super(x, y, id);                                        // Ruft Konstruktor der Basisklasse GameObject auf
+        this.handler = handler;                                 // Initialisiert den Handler
+        this.game2 = game2;
+        this.game = null;
         velX = -4;                              // Setzt Anfangsgeschwindigkeit des Balls in X-Richtung
         velY = 4;                               // Setzt Anfangsgeschwindigkeit des Balls in Y-Richtung
     }
@@ -31,7 +43,7 @@ public class Ball extends GameObject {
         y += velY;                          // Aktualisiert die Y-Position basierend auf der Geschwindigkeit
 
         // Abprallen am unteren Rand
-        if(y >= Game.hoehe - 60) {          // Wenn Ball den unteren Rand erreicht:
+        if(y >= Game.hoehe - 80) {          // Wenn Ball den unteren Rand erreicht:
             velY -= 4;                      // Ändert Richtung der Geschwindigkeit nach oben
         }
         
@@ -67,21 +79,37 @@ public class Ball extends GameObject {
     
 
     // Punkt für den Gegner, Ball verlässt Spielfeld links
-    if(x <= 0) {                                                 // Wenn Ball die linke Seite verlässt:
-        x = (Game.breite/2) - (30/2);                           // setzt den Ball zurück in die Mitte
-        velX = 4;                                               // setzt Geschwindigkeit Richtung Gegner
-        Game.gegnerPoint++;                                     // Erhöht Punktzahl des Gegners
+    if ( game != null) {
+        if(x <= 0) {                                                 // Wenn Ball die linke Seite verlässt:
+            x = (Game.breite/2) - (30/2);                           // setzt den Ball zurück in die Mitte
+            velX = 4;                                               // setzt Geschwindigkeit Richtung Gegner
+            Game.gegnerPoint++;                                     // Erhöht Punktzahl des Gegners
+    }
+
+        // Ball über rechte Seite, Spieler erziehlt einen Punkt
+        if(x > Game.breite - 20) {                                  // Wenn Ball die rechte Seite verlässt:
+            Game.playerPoint++;                                     // Erhöht Punktzahl des Spielers
+            x = (Game.breite/2) - (30/2);                           // setzt Ball zurück in die Mitte
+            velX = -4;                                              // setzt Geschwindigkeit Richtung Spieler
+    }
+}
+
+    // Punkt für Player 2, Ball verlässt Spielfeld links
+    if ( game2 != null) {
+        if(x <= 0) {                                                 // Wenn Ball die linke Seite verlässt:
+            x = (Game2.breite/2) - (30/2);                           // setzt den Ball zurück in die Mitte
+            velX = 4;                                               // setzt Geschwindigkeit Richtung Gegner
+            Game2.player2Point++;                                     // Erhöht Punktzahl des Gegners
     }
 
     // Ball über rechte Seite, Spieler erziehlt einen Punkt
-    if(x > Game.breite - 20) {                                  // Wenn Ball die rechte Seite verlässt:
-        Game.playerPoint++;                                     // Erhöht Punktzahl des Spielers
-        x = (Game.breite/2) - (30/2);                           // setzt Ball zurück in die Mitte
-        velX = -4;                                              // setzt Geschwindigkeit Richtung Spieler
+        if(x > Game2.breite - 20) {                                  // Wenn Ball die rechte Seite verlässt:
+            Game2.playerPoint++;                                     // Erhöht Punktzahl des Spielers
+            x = (Game2.breite/2) - (30/2);                           // setzt Ball zurück in die Mitte
+            velX = -4;                                              // setzt Geschwindigkeit Richtung Spieler
     }
+}
 
-    x += velX;              // Aktualisiert die X-Position erneut um Bewegung zu vervollständigen
-    y += velY;              // Aktualisiert die Y-Position erneut
 }
 
     @Override

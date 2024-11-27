@@ -38,12 +38,12 @@ public class Gegner extends GameObject{
                                                                                     keine Aktion erforderlich */
 
                 } else if (handler.object.get(i).getY() > this.getY()) {        //Wenn Ball unterhalb des Gegners, Gegner down
-                    if(y + 160 > Game.hoehe) {                                  // Gegner geht nicht über den unteren Rand hinaus
+                    if(y + 180 > Game.hoehe) {                                  // Gegner geht nicht über den unteren Rand hinaus
                         velY = 0;                                               // Geschwindigkeit wird auf 0 gesetzt
                     } else {
                         velY += 2;                                              // Gegner bewegt sich nach unten
                     }
-                    velY += 2;                                                  //Geschwindigkeit Gegner
+                    velY += 2;                                                 //Geschwindigkeit Gegner
                 } else if (handler.object.get(i).getY() < this.getY()) {        //Wenn Ball oberhalb des Gegners, Gegner up
                     if(y < 0) {
                         velY = 0;                                               // Geschwindigkeit wird auf 0 gesetzt

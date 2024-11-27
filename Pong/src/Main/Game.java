@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable {              // wird dadu
 
     // Konstruktor
     public Game(String name1) {
-
+        this.name1 = name1;
         init();                                                     // initialisiert die notwendigen Objekte
         Window window = new Window(breite, hoehe, title, this);     // Erstellt das Spielfenster
         start();                                                    // startet das Spiel
@@ -42,9 +42,9 @@ public class Game extends Canvas implements Runnable {              // wird dadu
 
         this.addKeyListener(keyHandler);        // fügt KeyHandler hinzu, um Tastatureingaben zu registrieren
 
-        handler.addObject(new Player(30, hoehe/2 - 65, ID.Player, keyHandler));                 // Erstellt Spieler
-        handler.addObject(new Gegner(breite - 50, (hoehe/2) - 65, ID.Gegner, handler));           // Erstellt Gegner
-        handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball, handler));      // Erstellt Ball
+        handler.addObject(new Player(30, hoehe/2 - 65, ID.Player, keyHandler));                         // Erstellt Spieler
+        handler.addObject(new Gegner(breite - 50, (hoehe/2) - 65, ID.Gegner, handler));                 // Erstellt Gegner
+        handler.addObject(new Ball((breite/2) - 15 - 16, (hoehe/2) - 15, ID.Ball, handler, this));      // Erstellt Ball
 
     }
 
@@ -94,10 +94,13 @@ public class Game extends Canvas implements Runnable {              // wird dadu
         }
 
         // Zeichnet die Punktestände
-        g.setFont(new Font("Arial", Font.PLAIN, 90));                                           // Setzt Schriftfarbe und Größe
+        g.setFont(new Font("Roboto", Font.PLAIN, 50));                                           // Setzt Schriftfarbe und Größe
         g.setColor(Color.WHITE);                                                                // Setzt Farbe auf weiß
-        g.drawString(String.valueOf(playerPoint), Game.breite / 4 - 30, 90);                    // zeichnet Spielerpunkte
-        g.drawString(String.valueOf(gegnerPoint), Game.breite - (Game.breite/4) - 30, 90);      // zeichnet Gegnerpunkte
+        g.drawString(String.valueOf(playerPoint), Game.breite / 2 - 90, 90);                    // zeichnet Spielerpunkte
+        g.drawString(String.valueOf(gegnerPoint), Game.breite / 2 + 40, 90);                    // zeichnet Gegnerpunkte        
+
+        // Zeichnet die Spielernamen
+        g.drawString(String.valueOf(name1), Game.breite / 8 , 90);
 
         handler.render(g);          // Zeichnet alle Spielobjekte
         bs.show();                  // zeigt Pufferinhalt an

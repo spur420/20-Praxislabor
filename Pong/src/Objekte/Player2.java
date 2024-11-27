@@ -14,8 +14,6 @@ public class Player2 extends GameObject{
     private final float acc = 1f;               // Beschleunigungsrate für die Bewegung
     private final float dcc = 0.3f;             // Verzögerungsrate / Gleiteffekt des Players beeinflussen
 
-    // Instanzvariable des Handlers der alle Spielobjekte verwaltet
-    
     private KeyHandler keyHandler;
 
     // Konstruktor
@@ -26,7 +24,7 @@ public class Player2 extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.YELLOW);                        // Setzt die Farbe des Player2
+        g.setColor(Color.GREEN);                        // Setzt die Farbe des Player2
         g.fillRect((int)x, (int)y, 15, 130);            // Legt Form des Player2 fest
     }
 
@@ -38,10 +36,14 @@ public class Player2 extends GameObject{
         if(keyHandler.key2[0] == true) {                             // Prüft ob Taste "W" gedrückt wird (== true ist optional)
             if (y > 0) {                                            // Verhindert, dass Spieler oberen Rand verlässt
                 velY -= acc;                                        // Erhöht Geschwindigkeit nach oben
+            } else {
+                velY = 0;
             }
         } else if (keyHandler.key2[1]) {                             // Prüft ob Taste "S" gedrückt wird
-            if (y - 130 < Game.hoehe) {                             // Verhindert, dass Spieler unteren Rand verlässt
+            if (y + 180 < Game.hoehe) {                             // Verhindert, dass Spieler unteren Rand verlässt
                 velY += acc;                                        // Erhöht Geschwindigkeit nach unten
+            } else {
+                velY = 0;
             }
         } else if (!keyHandler.key2[0] && !keyHandler.key2[1]) {
             if(velY > 0) {                                          // Wenn sich der Spieler nach unten bewegt:

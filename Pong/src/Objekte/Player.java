@@ -37,10 +37,14 @@ public class Player extends GameObject {
         if(keyHandler.key1[0] == true) {                             // Prüft ob Taste "W" gedrückt wird (== true ist optional)
             if (y > 0) {                                            // Verhindert, dass Spieler oberen Rand verlässt
                 velY -= acc;                                        // Erhöht Geschwindigkeit nach oben
-            }
+            } else {
+                 velY = 0;
+                }
         } else if (keyHandler.key1[1]) {                             // Prüft ob Taste "S" gedrückt wird
-            if (y - 130 < Game.hoehe) {                             // Verhindert, dass Spieler unteren Rand verlässt
+            if (y + 180 < Game.hoehe) {                             // Verhindert, dass Spieler unteren Rand verlässt
                 velY += acc;                                        // Erhöht Geschwindigkeit nach unten
+            } else {
+                velY = 0;
             }
         } else if (!keyHandler.key1[0] && !keyHandler.key1[1]) {
             if(velY > 0) {                                          // Wenn sich der Spieler nach unten bewegt:
