@@ -64,7 +64,7 @@ public class Player2 extends GameObject{
         if(value <= min) {                                              // Wenn maximale Geschwindigkeit unterschritten wird
             value = min;                                                // Setze sie auf das Minimum
         }
-        return value;                                                   // Gibt die begrenzte Geschwindikeit zurück
+        return value;                                                   // Gibt die begrenzte Geschwindigkeit zurück
     }
 
     // Gibt Rechteck zurück, dass die Position und Größe des Gegners beschreibt

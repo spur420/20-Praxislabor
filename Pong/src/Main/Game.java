@@ -101,6 +101,7 @@ public class Game extends Canvas implements Runnable {              // wird dadu
 
         // Zeichnet die Spielernamen
         g.drawString(String.valueOf(name1), Game.breite / 8 , 90);
+        g.drawString("PC", Game.breite * 6 / 8, 90);
 
         handler.render(g);          // Zeichnet alle Spielobjekte
         bs.show();                  // zeigt Pufferinhalt an

@@ -24,26 +24,50 @@ public class Gegner extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.white);                        // Setzt die Farbe des Gegners
+        g.setColor(Color.red);                        // Setzt die Farbe des Gegners
         g.fillRect((int)x, (int)y, 15, 130);            // Legt Form des Gegners fest
     }
 
     @Override
+public void tick() {                        
+    y += velY;                              // aktualisiert Y-Position basierend auf der vertikalen Geschwindigkeit
+
+    for (int i = 0; i < handler.object.size(); i++) {
+        if (handler.object.get(i).getId() == ID.Ball) {                    // Prüft ob das aktuelle Objekt ein Ball ist
+            if (handler.object.get(i).getY() > this.getY()) {              // Wenn Ball unterhalb des Gegners
+                if (y + 180 < Game.hoehe) {                                // Überprüft, ob der Gegner nicht über den unteren Rand hinausgeht
+                    velY = 3;                                              // Gegner-Velocity nach unten
+                } else {
+                    velY = 0;                                              // Gegner bleibt stehen
+                }
+            } else if (handler.object.get(i).getY() < this.getY()) {       // Wenn Ball oberhalb des Gegners
+                if (y > 0) {                                               // Überprüft, ob der Gegner nicht über den oberen Rand hinausgeht
+                    velY = -3;                                             // Gegner-Velocity nach oben
+                } else {
+                    velY = 0;                                              // Gegner bleibt stehen
+                }
+            }
+        }
+    }
+    velY = getMinMaxVel(velY, -5, 5);               // Begrenzung der Geschwindigkeit auf einen Bereich
+}
+
+   /*  @Override
     public void tick() {                        // automatische Gegnerbewegung
         y += velY;                              // aktualisiert Y-Position basierend auf der vertikalen Geschwindigkeit
 
         for (int i = 0; i < handler.object.size(); i++) {
             if ( handler.object.get(i).getId() == ID.Ball) {                    // Prüft ob das aktuelle Objekt ein Ball ist
-                if (handler.object.get(i).getY() == this.getY()) {              /* Wenn Ball auf der selben Position wie der Gegner
-                                                                                    keine Aktion erforderlich */
+                if (handler.object.get(i).getY() == this.getY()) {              //* Wenn Ball auf der selben Position wie der Gegner
+                                                                                //    keine Aktion erforderlich
 
                 } else if (handler.object.get(i).getY() > this.getY()) {        //Wenn Ball unterhalb des Gegners, Gegner down
-                    if(y + 180 > Game.hoehe) {                                  // Gegner geht nicht über den unteren Rand hinaus
+                    if(y + 180 < Game.hoehe) {                                  // Gegner geht nicht über den unteren Rand hinaus
                         velY = 0;                                               // Geschwindigkeit wird auf 0 gesetzt
                     } else {
                         velY += 2;                                              // Gegner bewegt sich nach unten
                     }
-                    velY += 2;                                                 //Geschwindigkeit Gegner
+                    velY += 5;                                                 //Geschwindigkeit Gegner
                 } else if (handler.object.get(i).getY() < this.getY()) {        //Wenn Ball oberhalb des Gegners, Gegner up
                     if(y < 0) {
                         velY = 0;                                               // Geschwindigkeit wird auf 0 gesetzt
@@ -55,7 +79,7 @@ public class Gegner extends GameObject{
             }
         }
         velY = getMinMaxVel(velY, -4, 4);               // Begrenzung der Geschwindigkeit auf einen Bereich
-    }
+    } */
 
     private float getMinMaxVel(float value, float min, float max) {
         if (value >= max) {                     // Wenn der Wert die obere Grenze überschreitet:
